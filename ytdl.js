@@ -18,6 +18,4 @@ ytdl('https://youtube.com/watch?v=0aX3Bjzdq0Y', {
         console.log(array[item])
     }
         
-        
-
 }).catch(err => console.log('Erro ao fazer a requisição do vídeo: ' + err))
