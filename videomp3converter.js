@@ -1,6 +1,6 @@
 const request = require('request')
 const ytdl = require('youtube-dl-exec')
-const fs = require('fs');
+const fs = require('fs')
 
 function requestVideo (url) {
     let videoList = []
@@ -22,6 +22,7 @@ function requestVideo (url) {
     
             if (array[item]['ext'] == 'webm' && array[item]['filesize'] != null) {
                 video = {
+                    title: output['title'],
                     filesize: array[item]['filesize'],
                     format: array[item]['ext'],
                     videoUrl: array[item]['url']
@@ -39,11 +40,12 @@ function requestVideo (url) {
                  
     })
     .then(videoList => {
-        //console.log(videoList[0]['videoUrl'])
-        request(videoList[0]['videoUrl']).pipe(fs.createWriteStream('audio.mp3'))
+        /* Elimina todos os caracteres não permitidos como nome de arquivo no Windows */
+        let mp3file = videoList[0]['title'].replace(/[/\<>?|""*&]/g, '')
+        request(videoList[0]['videoUrl']).pipe(fs.createWriteStream(`./download/${mp3file}.mp3`))
     })
-    .catch(err => console.log('Erro ao fazer a requisição do vídeo: ' + err))
+    .catch(err => console.log(`Erro ao fazer a requisição do vídeo para a url: '${url}'`))
 
 }
 
-requestVideo('https://www.youtube.com/watch?v=L_jWHffIx5E')
+module.exports = requestVideo
