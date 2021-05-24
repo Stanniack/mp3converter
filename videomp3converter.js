@@ -20,11 +20,12 @@ function requestVideo (url) {
     
         for (item in array) {
     
-            if (array[item]['ext'] == 'webm' && array[item]['filesize'] != null) {
+            if (array[item]['ext'] == 'webm' && array[item]['filesize'] != null && array[item]['format'].includes('audio only')) {
                 video = {
                     title: output['title'],
                     filesize: array[item]['filesize'],
-                    format: array[item]['ext'],
+                    ext: array[item]['ext'],
+                    format: array[item]['format'],
                     videoUrl: array[item]['url']
                 }
     
