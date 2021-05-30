@@ -44,9 +44,9 @@ function requestVideo (url) {
         /* Elimina todos os caracteres não permitidos como nome de arquivo no Windows */
         let mp3file = videoList[0]['title'].replace(/[/\<>?|""*&]/g, '')
         request(videoList[0]['videoUrl']).pipe(fs.createWriteStream(`./download/${mp3file}.mp3`))
-        console.log(`Fazendo o download do vídeo '${videoList['title']}'`)
+        console.log(`Fazendo o download do vídeo '${videoList[0]['title']}'`)
     })
-    .catch(err => console.log(`Erro ao fazer a requisição do vídeo '${videoList['title']}' para a url: '${url}'`))
+    .catch(err => console.log(`Erro ao fazer a requisição do vídeo para a url: '${url}'`))
 
 }
 
