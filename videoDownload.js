@@ -43,7 +43,7 @@ function requestVideo (url) {
     })
     .then(videoList => {
         /* Elimina todos os caracteres não permitidos como nome de arquivo no Windows */
-        let videoFile = videoList[0]['title'].replace(/[/\<>?|""*&]/g, '')
+        let videoFile = videoList[0]['title'].replace(/[:/\<>?|""*&]/g, '')
         request(videoList[0]['videoUrl']).pipe(fs.createWriteStream(`./download/${videoFile}.webm`))
         console.log(`Fazendo o download do vídeo '${videoList[0]['title']}'`)
 
